@@ -1,0 +1,33 @@
+* {
+    box-sizing: border-box;
+    font-family: sans-serif;
+    margin: 0px;
+    padding: 0px;
+}
+
+canvas {
+    /* Override default width x height: 300 x 150 px*/
+    width: 90%;
+    max-width: 720px;
+    height: 30%;
+    max-height: 300px;
+    border: solid 1px rgb(192, 192, 192);
+    margin: 10px auto;
+    display: block;
+    image-rendering: pixelated;
+}
+
+#appTitle {
+    font-size: 1.5rem;
+    padding: 1rem;
+}
+
+p, #totalAmount, #appTitle {
+    text-align: center;
+}
+
+#totalAmount {
+    font-size: 3rem;
+    padding-top: 0.5rem;
+    padding-bottom: 2rem;
+}
