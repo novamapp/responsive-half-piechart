@@ -3,6 +3,7 @@ totalFormatted = new Intl.NumberFormat().format(total)
 
 const canvas = document.querySelector('#halfPieChart')
 const updateBtn = document.querySelector('#updateBtn')
+const SEGMENT_ANIMATE_DURATION = 1_000 // one second
 
 input = [
     {
@@ -70,25 +71,39 @@ function drawNextArc(
         endAngle,
         ctx, CANVAS_WIDTH, CANVAS_HEIGHT, OUTER_CIRCLE_RADIUS, ARC_STROKE_WIDTH
     )
-    drawNextArc(counter + 1, endAngle,ctx, 
+    setTimeout(() => {
+        drawNextArc(counter + 1, endAngle,ctx,
         CANVAS_WIDTH, CANVAS_HEIGHT, OUTER_CIRCLE_RADIUS, ARC_STROKE_WIDTH)
+    }, SEGMENT_ANIMATE_DURATION)
 }
 
 function drawCurrentArc(
     rgbaValue, startAngle, endAngle, ctx, 
     CANVAS_WIDTH, CANVAS_HEIGHT, OUTER_CIRCLE_RADIUS, ARC_STROKE_WIDTH
 ) {
-    ctx.lineWidth = ARC_STROKE_WIDTH
-    ctx.strokeStyle = rgbaValue
-    ctx.beginPath()
-    ctx.arc(
-        CANVAS_WIDTH / 2, CANVAS_HEIGHT, // center(x, y)
-        OUTER_CIRCLE_RADIUS,
-        startAngle,
-        endAngle,
-        false
-    )
-    ctx.stroke()
+
+    const dx_rate = (endAngle - startAngle) / SEGMENT_ANIMATE_DURATION
+
+    let current_angle = startAngle
+
+    const curveAnimation = setInterval(() => {
+        ctx.lineWidth = ARC_STROKE_WIDTH
+        ctx.strokeStyle = rgbaValue
+        ctx.beginPath()
+        ctx.arc(
+            CANVAS_WIDTH / 2, CANVAS_HEIGHT, // center(x, y)
+            OUTER_CIRCLE_RADIUS,
+            startAngle,
+            current_angle += dx_rate,
+            false
+        )
+        ctx.stroke()
+
+        if (current_angle >= endAngle) {
+            clearInterval(curveAnimation)
+            curveAnimation = null
+        }
+    }, dx_rate)
 }
 
 function toRGBAString(arr) {
