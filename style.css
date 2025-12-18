@@ -5,14 +5,16 @@
     padding: 0px;
 }
 
-canvas {
-    /* Override default width x height: 300 x 150 px*/
+canvas, #config {
     width: 90%;
     max-width: 720px;
-    height: 30%;
-    max-height: 300px;
     border: solid 1px rgb(192, 192, 192);
     margin: 10px auto;
+}
+
+canvas {
+    height: 30%;
+    max-height: 300px;
     display: block;
     image-rendering: pixelated;
 }
@@ -30,4 +32,17 @@ p, #totalAmount, #appTitle {
     font-size: 3rem;
     padding-top: 0.5rem;
     padding-bottom: 2rem;
+}
+
+#config {
+    display: flex;
+    justify-content: right;
+    padding: 20px 0px;
+}
+
+#updateBtn {
+    background-color: rgb(168, 126, 126);
+    padding: 3px 5px;
+    border: solid 1px rgb(97, 68, 68);
+    border-radius: 3px;
 }
