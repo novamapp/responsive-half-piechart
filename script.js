@@ -1,6 +1,9 @@
 total = 5_000
 totalFormatted = new Intl.NumberFormat().format(total)
 
+const canvas = document.querySelector('#halfPieChart')
+const updateBtn = document.querySelector('#updateBtn')
+
 input = [
     {
         "rgba": toRGBAString([38,35,34,0.6]),
@@ -27,8 +30,6 @@ input = [
 function draw() {
     const totalAmountElement = document.querySelector('#totalAmount')
     totalAmountElement.textContent = totalFormatted
-
-    const canvas = document.querySelector('#halfPieChart')
     const canvasCSS = getComputedStyle(canvas)
 
     const CANVAS_WIDTH = parseInt(canvasCSS.width.replace(/\D/g,''))
